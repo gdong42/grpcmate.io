@@ -1,0 +1,30 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "gRPC Mate"
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+
+[params]
+grpc_mate_release_tag = "v0.1"
+
+# Site menus
+[menu]
+[[menu.dropdown]]
+name = "Introduction"
+url = "/docs"
+weight = 1
+
+[[menu.dropdown]]
+name = "Quick Start"
+url = "/docs/quickstart"
+weight = 2
+
+[[menu.dropdown]]
+name = "Guides"
+url = "/docs/guides"
+weight = 3
+
+[[menu.guides]]
+name = "Design Goals"
+url = "/docs/guides/design/"
+weight = 1
