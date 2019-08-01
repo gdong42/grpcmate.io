@@ -1,1 +1,9 @@
+# Hugo default output directory
+/public
+/resources
+
+## OS Files
+# OSX
 .DS_Store
+*~
+
