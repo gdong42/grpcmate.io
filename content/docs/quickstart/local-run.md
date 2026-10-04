@@ -31,10 +31,12 @@ It's really simple to run. Let's connect to the gRPC server started above as an 
 ##### Run gRPC Mate via Docker
 
 ```bash
-$ docker run --name grpc-mate -e GRPC_MATE_PROXIED_HOST=<your grpc server local IP> -e GRPC_MATE_PROXIED_PORT=50051 -dp 6600:6600 gdong/grpc-mate
+$ docker run --name grpc-mate -e GRPC_MATE_PROXIED_HOST=<your grpc server local IP> -e GRPC_MATE_PROXIED_PORT=50051 -dp 6600:6600 gdong42/grpc-mate:0.2
 ```
 
 Note above `GRPC_MATE_PROXIED_HOST` has to be set to your IP address other than localhost, so that grpc-mate running inside docker can access it.
+
+The `0.2` and `latest` images support `linux/amd64` and `linux/arm64`.
 
 ##### Run gRPC Mate directly
 ```bash
@@ -42,7 +44,7 @@ $ GRPC_MATE_PROXIED_PORT=50051 ./grpc-mate
 ```
 This by default listens on 6600 as HTTP port, and connects to a local gRPC server running at `localhost:50051`
 
-To connect to other gRPC server host and port, refer to the configuration section.
+For another host, port, or TLS-enabled backend, see [Configuration](/docs/guides/configuration/).
 
 #### Introspecting Services
 
@@ -72,6 +74,14 @@ Now try get `http://localhost:6600/actuator/services`, you will see all services
 
 ```
 
+Filter `/actuator/services` by exact, case-sensitive service or method name:
+
+* `/actuator/services?name=helloworld.Greeter`
+* `/actuator/services?method=SayHello`
+* `/actuator/services?name=helloworld.Greeter&method=SayHello`
+
+Both filters must match when combined. The response includes only matching methods and their input/output templates; shared types appear once. No match returns `{"services":[],"types":[]}` with HTTP 200. Missing or empty filters match everything.
+
 #### Making Requests
 
 Now let's try making gRPC requests using above inspected information
@@ -83,3 +93,9 @@ $ curl -X POST -d '{"name":"gdong42"}' "http://localhost:6600/v1/helloworld.Gree
 Above we invoked `SayHello` method of `helloworld.Greeter` service, with JSON message of `helloworld.HelloRequest` type, and got a JSON message of `helloworld.HelloReply` type.
 
 Note the HTTP method is POST, the body is a JSON string, and the request path is of pattern `/v1/{serviceName}/{methodName}`.
+
+#### Errors and limitations
+
+If upstream reflection is unimplemented, RPC requests and `/actuator/services` return HTTP 502 with guidance to enable it. A gRPC `ResourceExhausted` error returns HTTP 429.
+
+gRPC Mate currently supports unary calls only.
