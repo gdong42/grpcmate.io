@@ -5,7 +5,7 @@ pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 
 [params]
-grpc_mate_release_tag = "v0.1"
+grpc_mate_release_tag = "v0.2"
 
 # Site menus
 [menu]
@@ -28,3 +28,8 @@ weight = 3
 name = "Design Goals"
 url = "/docs/guides/design/"
 weight = 1
+
+[[menu.guides]]
+name = "Configuration"
+url = "/docs/guides/configuration/"
+weight = 2

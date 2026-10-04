@@ -12,3 +12,5 @@ see our [Quick Starts](../quickstart).
 ### Overview
 
 If you want to learn more about why gRPC Mate is designed this way, check out [Design Goals](/docs/guides/design/).
+
+For environment variables and upstream TLS, see [Configuration](/docs/guides/configuration/).

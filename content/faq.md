@@ -41,6 +41,10 @@ gRPC Mate itself is licensed under [Apache 2.0](https://github.com/gdong42/grpc-
 
 Check out the [documentation](/docs) right here on grpcmate.io.
 
-### What is the latest gRPC Version?
+### What is the latest gRPC Mate version?
 
-The latest release tag is {{< param grpc_mate_release_tag >}}.
+The latest release tag is {{< param grpc_mate_release_tag >}}. See the [release notes](https://github.com/gdong42/grpc-mate/releases/tag/v0.2).
+
+### Does gRPC Mate support streaming or mTLS?
+
+Only unary calls are supported. Upstream TLS and custom CA bundles are supported; client certificates/mTLS are not. See [Configuration](/docs/guides/configuration/).
